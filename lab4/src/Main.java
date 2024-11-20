@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -86,6 +89,41 @@ public class Main {
             }
             System.out.println("]");
         }
+        
+        //ЗАДАЧА 3-4
+
+        CollectionProcessor<Object, Collection<Object>> processor = new ProcessorImpl<>();
+
+        // Пример 1: Разделение на два списка
+        List<Integer> numbers3 = List.of(1, -3, 7);
+        Map<Boolean, List<Integer>> positiveAndNegative = processor.process(
+                numbers3,
+                () -> new HashMap<Boolean, List<Integer>>() {{
+                    put(true, new ArrayList<>());
+                    put(false, new ArrayList<>());
+                }},
+                (number, map) -> map.get(number > 0).add(number)
+        );
+        System.out.println("Положительные: " + positiveAndNegative.get(true));
+        System.out.println("Отрицательные: " + positiveAndNegative.get(false));
+
+        // Пример 2: Группировка строк по длине
+        List<String> strings3 = List.of("qwerty", "asdfg", "zx", "qw");
+        Map<Integer, List<String>> groupedByLength = processor.process(
+                strings,
+                HashMap::new,
+                (str, map) -> map.computeIfAbsent(str.length(), k -> new ArrayList<>()).add(str)
+        );
+        System.out.println("Группировка по длине: " + groupedByLength);
+
+        // Пример 3: Уникальные значения
+        List<String> duplicates = List.of("qwerty", "asdfg", "qwerty", "qw");
+        Set<String> uniqueSet = processor.process(
+                duplicates,
+                HashSet::new,
+                Set::add
+        );
+        System.out.println("Уникальные значения: " + uniqueSet);
     }
 
     // Метод, который принимает коробку и извлекает её содержимое
