@@ -55,12 +55,12 @@ public class Main {
 
         FilterUtils filter = new FilterUtils();
         List<String> strings = List.of("qwerty", "asdfg", "zx");
-        List<String> filteredStrings = filter(strings, s -> s.length() >= 3);
+        List<String> filteredStrings = filter.filter(strings, s -> s.length() >= 3);
         System.out.println("Filtered strings: " + filteredStrings);
 
         // 2. Фильтрация положительных чисел
         List<Integer> numbers = List.of(1, -3, 7);
-        List<Integer> filteredNumbers = filter(numbers, n -> n <= 0);
+        List<Integer> filteredNumbers = filter.filter(numbers, n -> n <= 0);
         System.out.println("Filtered numbers: " + filteredNumbers);
 
         // 3. Фильтрация массивов целых чисел, где нет положительных элементов
@@ -69,7 +69,7 @@ public class Main {
                 new int[]{-4, -5, -6},
                 new int[]{0, -1, -3}
         );
-        List<int[]> filteredArrays = filter(arrays, array -> {
+        List<int[]> filteredArrays = filter.filter(arrays, array -> {
             for (int num : array) {
                 if (num > 0) {
                     return false;
