@@ -34,8 +34,10 @@ public class Main {
         Count count1 = new Count(5);
         Count count2 = new Count(10);
 
+        System.out.println("Сравниваемые значения: " + count1.getValue() + " и " + count2.getValue());
+
         // Вызов метода "сравнить" и вывод результата
-        System.out.println("Варианты результатов: ");
+        System.out.println("\nВарианты результатов: ");
         System.out.println("-1, когда первое число больше второго ");
         System.out.println("1, когда второе число больше первого ");
         System.out.println("0, когда оба числа равны ");
@@ -54,6 +56,8 @@ public class Main {
         box2.put(3.14);
         box3.put(7.5f);
 
+        System.out.println("Значения в коробках:\n" + box1.get() + "\n" + box2.get() + "\n" + box3.get());
+
         List<Box2<? extends Number>> boxes = new ArrayList<>();
         boxes.add(box1);
         boxes.add(box2);
@@ -71,12 +75,12 @@ public class Main {
         // Пример 1: Длина строки
         List<String> strings = Arrays.asList("qwerty", "asdfg", "zx");
         List<Integer> lengths = transformer.transform(strings, String::length);
-        System.out.println("Длины строк: " + lengths); // [6, 5, 2]
+        System.out.println("Длины строк: " + lengths);
 
         // Пример 2: Абсолютное значение
         List<Integer> numbers = Arrays.asList(1, -3, 7);
         List<Integer> absolutes = transformer.transform(numbers, Math::abs);
-        System.out.println("Абсолютные значения: " + absolutes); // [1, 3, 7]
+        System.out.println("Абсолютные значения: " + absolutes);
 
         // Пример 3: Максимум в массиве
         List<int[]> arrays = Arrays.asList(
